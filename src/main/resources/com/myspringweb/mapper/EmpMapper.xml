@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myspringweb.mapper.EmpMapper">
+    <delete id="delete">
+        delete
+        from emp
+        where id
+        in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="page" resultType="com.myspringweb.pojo.Emp">
+        select *
+        from emp
+        <where>
+            <if test="name != null and name !=''">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entryDate between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+    <insert id="save">
+        insert into emp(username, name, gender, image, job, entryDate, dept_id, created_time, update_time)
+        values (#{username}, #{name}, #{gender},#{image},#{job},#{entryDate},#{deptId},#{createdTime},#{updateTime})
+    </insert>
+    <update id="update">
+        update emp
+        <set>
+            <if test="username!=null and username!=''">
+                username = #{name},
+            </if>
+            <if test="password!=null and password!=''">
+                password = #{password},
+            </if>
+            <if test="name!=null and name!=''">
+                name = #{name},
+            </if>
+            <if test="gender!=null ">
+                gender = #{gender},
+            </if>
+            <if test="image!=null and image!=''">
+                image = #{image},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="entryDate!=null and entryDate!=''">
+                entryDate = #{entryDate},
+            </if>
+            <if test="deptId != null and depdId != ''">
+                dept_Id = #{deptId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where
+            id = #{id}
+    </update>
+
+</mapper>
