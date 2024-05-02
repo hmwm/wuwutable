@@ -20,6 +20,7 @@ public class UploadController {
     public Result upload(MultipartFile image) throws Exception {
         log.info("文件上传，文件名：{}", image.getOriginalFilename());
         String url = aliOSSUtils.upload(image);
+        System.out.println(url);
         return Result.success(url);
     }
 }

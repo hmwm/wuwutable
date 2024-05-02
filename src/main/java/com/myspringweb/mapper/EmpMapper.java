@@ -10,6 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface EmpMapper {
+    @Select("select * from springweb.emp where username = #{username} and password = #{password}")
+    Emp getByUsernameAndPassword(Emp emp);
+
     @Select("select * from springweb.emp")
     List<Emp> listEmp();
     //@Delete("delete from springweb.emp where id = #{id}")
@@ -34,4 +37,6 @@ public interface EmpMapper {
     Emp getById(Integer id);
 
     void update(Emp emp);
+    @Delete("delete from springweb.emp where dept_id = #{id}")
+    void deleteByDeptId(Integer id);
 }

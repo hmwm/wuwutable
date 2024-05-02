@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -36,8 +37,8 @@ public class EmpController {
         PageBean pageBean = empService.page(page, pageSize, name, gender, begin, end);
         return Result.success(pageBean);
     }
-    @DeleteMapping("/{ids}")
-    public Result deleteEmp(@PathVariable Integer[] ids) {
+    @DeleteMapping()
+    public Result deleteEmp(@RequestParam Integer[] ids) {
         log.info("删除部分员工信息");
         empService.delete(ids);
         return Result.success();

@@ -25,4 +25,7 @@ aliyun:
     endpoint: https://oss-cn-wuhan-lr.aliyuncs.com
     bucketname: hspacetest
 
-
+#开启事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.jdbcTransactionManager: debug
