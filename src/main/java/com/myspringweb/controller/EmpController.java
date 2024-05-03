@@ -1,5 +1,6 @@
 package com.myspringweb.controller;
 
+import com.myspringweb.annotations.Log;
 import com.myspringweb.pojo.Emp;
 import com.myspringweb.pojo.PageBean;
 import com.myspringweb.pojo.Result;
@@ -10,8 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -37,13 +37,15 @@ public class EmpController {
         PageBean pageBean = empService.page(page, pageSize, name, gender, begin, end);
         return Result.success(pageBean);
     }
-    @DeleteMapping()
-    public Result deleteEmp(@RequestParam Integer[] ids) {
+    @Log
+    @DeleteMapping("/{ids}")
+    public Result deleteEmp(@PathVariable Integer[] ids) {
         log.info("删除部分员工信息");
         empService.delete(ids);
         return Result.success();
     }
     //新增员工
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("插入员工Emp:{}",emp);
@@ -58,6 +60,7 @@ public class EmpController {
         return Result.success(empInfo);
     }
     //在回显下，修改员工数据
+    @Log
     @PutMapping
     public Result updateEmp(@RequestBody Emp emp) {
         log.info("更新员工信息:{}",emp);

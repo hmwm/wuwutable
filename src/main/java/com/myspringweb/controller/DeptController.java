@@ -1,5 +1,6 @@
 package com.myspringweb.controller;
 
+import com.myspringweb.annotations.Log;
 import com.myspringweb.pojo.Dept;
 import com.myspringweb.pojo.Result;
 import com.myspringweb.service.DeptService;
@@ -25,6 +26,7 @@ public class DeptController {
         List<Dept> deptList = deptService.list();
         return Result.success(deptList);
     }
+    @Log
     @DeleteMapping("/dept/{id}")
     public Result delete(@PathVariable Integer id) {
         log.info("删除一个部门");
@@ -32,12 +34,14 @@ public class DeptController {
         return Result.success();
     }
 
+    @Log
     @PostMapping("/dept")
     public Result add(@RequestBody Dept dept) {
         log.info("新增一个部门");
         deptService.add(dept);
         return Result.success();
     }
+    @Log
     @PatchMapping("/dept/{id}")
     public Result alter(@PathVariable Integer id, @RequestBody Dept dept) {
         log.info("一条部门信息已修改");
