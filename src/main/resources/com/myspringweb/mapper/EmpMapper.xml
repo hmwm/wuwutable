@@ -52,10 +52,10 @@
             <if test="job != null">
                 job = #{job},
             </if>
-            <if test="entryDate!=null and entryDate!=''">
+            <if test="entryDate!=null">
                 entryDate = #{entryDate},
             </if>
-            <if test="deptId != null and depdId != ''">
+            <if test="deptId != null and deptId != ''">
                 dept_Id = #{deptId},
             </if>
             <if test="createdTime != null">

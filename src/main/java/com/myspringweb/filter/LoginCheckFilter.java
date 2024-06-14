@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.myspringweb.pojo.Result;
 import com.myspringweb.utils.JwtUtils;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

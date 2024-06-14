@@ -1,6 +1,7 @@
 package com.myspringweb.utils;
 
 
+import com.aliyun.oss.ClientBuilderConfiguration;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;
@@ -30,13 +31,21 @@ public class AliOSSUtils {
         String originalFilename = file.getOriginalFilename();
         String fileName = UUID.randomUUID().toString() + originalFilename.substring(originalFilename.lastIndexOf("."));
 
+        //创建ClientBuilderConfiguration实例，根据实际情况修改默认参数
+        ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
+
+        //设置支持CNAME，用于将自定义域名绑定到目标bucket
+        conf.setSupportCname(true);
 
         // 上传文件，创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(endpoint, credentialsProvider);
+        OSS ossClient = new OSSClientBuilder().build(endpoint, credentialsProvider, conf);
         ossClient.putObject(bucketName, fileName, inputStream);
 
         //文件访问路径
-        String url = endpoint.split("//")[0] + "//" + bucketName + "." + endpoint.split("//")[1] + "/" + fileName;
+        //String url = endpoint.split("//")[0] + "//" + bucketName + "." + endpoint.split("//")[1] + "/" + fileName;
+        //文件访问路径
+        String url = endpoint.split("//")[0] + "//" + endpoint.split("//")[1] + "/" + fileName;
+
         //关闭ossClient
         ossClient.shutdown();
         //返回上传文件的路径

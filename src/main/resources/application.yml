@@ -12,6 +12,14 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+  #跨域请求配置
+#  mvc:
+#    cors:
+#      mapping: /**
+#      allowed-origins: http://localhost:7000/
+#      allowed-methods: GET, POST, PUT, DELETE
+#      allowed-headers: "*"
+#      allowed-credentials: true
 
 #Mybatis配置
 mybatis:
@@ -22,10 +30,11 @@ mybatis:
 #自定义阿里云配置
 aliyun:
   oss:
-    endpoint: https://oss-cn-wuhan-lr.aliyuncs.com
-    bucketname: hspacetest
+    endpoint: http://apr-akina.online
+    bucketname: akina
 
 #开启事务管理日志
 logging:
   level:
     org.springframework.jdbc.support.jdbcTransactionManager: debug
+
